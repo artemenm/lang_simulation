@@ -6,11 +6,13 @@ from typing import List, Dict
 
 class Community:
     def __init__(self,
+                 simulation,
                  name: str,
                  appeal: int,
                  agents,
                  langs: Dict[Lang, int],
                  official_lang: Lang):
+        self.simulation = simulation
         self.name: str = name
         self.appeal: int = appeal
 

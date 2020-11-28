@@ -15,6 +15,9 @@ class Agent:
         self.community: Community = community
         self.langs: List[Lang] = []
         self.age: int = 0
+        self.id = simulation.n_agents
+
+        simulation.n_agents += 1
 
     def study(self) -> None:
         for lang in [self.community.official_lang, self.community.most_common_lang]:
