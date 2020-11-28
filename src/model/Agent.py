@@ -1,7 +1,7 @@
 import numpy as np
 
-from model.Community import Community
-from model.Lang import Lang
+from src.model.Community import Community
+from src.model.Lang import Lang
 
 from typing import List, Dict
 

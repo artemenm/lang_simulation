@@ -1,4 +1,4 @@
-from model.Lang import Lang
+from src.model.Lang import Lang
 
 from collections import Counter, defaultdict
 from typing import List, Dict
@@ -14,7 +14,7 @@ class Community:
         self.name: str = name
         self.appeal: int = appeal
 
-        from model.Agent import Agent
+        from src.model.Agent import Agent
         self.agents: List[Agent] = []
 
         self.langs: Dict[Lang, int] = defaultdict(int)

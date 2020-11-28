@@ -1,4 +1,4 @@
-from model.Community import Community
+from src.model.Community import Community
 
 from typing import List
 
