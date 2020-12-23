@@ -13,16 +13,19 @@ class Agent:
                  languages: List[Lang] = []):
         self.simulation = simulation
         self.community: Community = community
-        self.langs: List[Lang] = []
+        self.langs: List[Lang] = languages
         self.age: int = 0
-        self.id = simulation.n_agents
 
+        self.id = simulation.n_agents
         simulation.n_agents += 1
 
     def study(self) -> None:
-        for lang in [self.community.official_lang, self.community.most_common_lang]:
-            if lang is not None and lang not in self.langs:
-                self.langs.append(lang)
+        if np.random.random() < self.simulation.official_lang_pressure:
+            self.langs.append(self.community.official_lang)
+
+        if self.community.most_common_lang is not None and \
+            self.community.most_common_lang not in self.langs:
+            self.langs.append(self.community.most_common_lang)
 
     def get_migration_probs(self) -> Dict[Community, float]:
         langs = {
@@ -64,12 +67,16 @@ class Agent:
         self.community = np.random.choice(communities, p=probs)
         self.community.add_agent(self)
 
+        lang = self.community.most_common_lang
+        if lang is not None and lang not in self.langs:
+            self.langs.append(lang)
+
     def give_birth(self) -> None:
         lang = np.random.choice(self.langs)
 
         self.community.agents.append(Agent(self.simulation,
                                            self.community,
-                                           lang))
+                                           [lang]))
 
     def die(self):
         self.community.agents.remove(self)
